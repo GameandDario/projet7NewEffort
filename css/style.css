@@ -1,0 +1,174 @@
+:root{
+   
+    --font-family_main : 'Source Sans Pro', sans-serif;
+    --font-family_second : 'Roboto Mono', monospace;
+    --font-family_title : 'Fraunces', serif;
+}
+
+
+body {
+    background-color: coral;
+    font-family: var(--font-family_main);
+    color: white;
+}
+.finaleBody {
+    background-color: #f4b9d5;
+}
+.form_finale:hover {
+    background-color: #b178ab;
+}
+#secondOption {
+    display: none;
+}
+
+nav {
+    background-color: rgba(255, 127, 80, 0.623);
+}
+.smart-scroll{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
+  .scrolled-down{
+     transform:translateY(-100%); transition: all 0.3s ease-in-out;
+  }
+  .scrolled-up{
+     transform:translateY(0); transition: all 0.3s ease-in-out;
+  }
+a {
+    color : rgb(108, 31, 35);
+}
+h1, h2 {
+    color: darkslategray;
+}
+/* main {
+    margin-top: 185px ;
+} */
+.title_underline_dotted {
+    border-bottom: darkslategray dotted 4px;
+}
+.ff_main {
+    font-family: var(--font-family_title);
+}
+ .ff_second {
+     font-family: var(--font-family_second);
+}
+.bg-second {
+    background-color: #4169b53d;
+}
+.citationBlock {
+    height: 200px;
+}
+#resultatCitation, #listFinaleCitation {
+    font-size: 2rem;
+}
+
+button:hover {background-color: #3e8e41}
+button:active {
+  background-color: red;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+#solution1, #solution3, #solution3_1  {
+    display: none;
+    color:rgb(100, 58, 58);    
+}
+
+#myTopBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: rgb(124, 24, 24); /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 12px; /* Increase font size */
+  }  
+  #myTopBtn:hover {
+    background-color: #555; /* Add a dark-grey background on hover */
+  }
+
+
+  /* Map style */
+
+  #mapParis {
+    height: 400px;
+    width: 100%;
+  }
+
+  #map {
+    height: 400px;
+    width: 100%;
+  }
+
+  .custom-map-control-button {
+    appearance: button;
+    background-color: rgb(70, 156, 131);
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin: 10px;
+    padding: 0 0.5em;
+    height: 40px;
+    font: 400 18px Roboto, Arial, sans-serif;
+    overflow: hidden;
+  }
+  .custom-map-control-button:hover {
+    background: #ebebeb;
+  }
+  
+  .gm-style-iw-d {
+      color : chocolate;
+  }
+
+  article, .my_container {
+      border: 2px solid burlywood;
+      background-color: cadetblue;
+      border-radius: 10px;
+      margin : 10px;
+      padding: 10px;
+      width: 75%;
+  }
+  hr {
+    border: 2px solid burlywood;
+  }
+
+  .restaurant-wrapper {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .restaurant-wrapper span { display: block;}
+
+  .moyenne {
+    font-size: 18px;
+    color: green;
+  }
+
+  .flex{
+    width: 100%;
+    display: flex !important;
+    justify-content: space-between;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .add-comment-wrapper {
+    background-color:rgb(240, 180, 109);
+  }
+  #comments_ul-el {
+    background-color:rgb(54, 111, 85);
+  }
+  #scores_ul-el {
+    background-color:rgb(54, 84, 111);
+  }
