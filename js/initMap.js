@@ -35,9 +35,7 @@ function initMap() {
       bounds: myBounds,
       //bounds: which must be a google.maps.LatLngBounds
       fields: [
-        "name",
-        "formatted_address",
-        /* "place_id", */
+        //"name",
         "geometry",
         "openNow",
         "restaurants",
@@ -90,50 +88,47 @@ function initMap() {
 }
 /* Fin initMap */
 
+//Afficher les marker en fonction du service
+const callback = (results, status) => {
+  if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+    for (let i = 0; i < results.length; i++) {
+      console.log(results[i], 'results[i]');
+      createMarker(results[i]);
+    }
+    //myMap.setCenter(results[0].geometry.location);
+  }
 
-
- // ajouter un marker sur la carte en fonction de la requête de lieu
+   // ajouter un marker sur la carte en fonction de la requête de lieu
  function createMarker(place) {
   const photos = place.photos;
   if (!place.geometry || !place.geometry.location) return;
-
+  
   const marker = new google.maps.Marker({
     map: myMap,
     position: place.geometry.location,
-    title: place.name,
+
   });
   google.maps.event.addListener(marker, "click", () => {
     //création de InfoWindow pour un marker
     const myInfoWindow = new google.maps.InfoWindow();
 
-    const content = document.createElement("div");
-    
-    const nameElement = document.createElement("h2");
-    nameElement.textContent = place.name;
-    content.appendChild(nameElement);
-
-    const placeIsOpenElement = document.createElement("p");
-    placeIsOpenElement.textContent = place.openNow;
-    content.appendChild(placeIsOpenElement);
-ls
-    const placePhotoElement = document.createElement("img");
-    placePhotoElement.src = photos[0].getUrl({ maxWidth: 55, maxHeight: 55 });
-    content.appendChild(placePhotoElement);
-
+    //const content = document.createElement("div");
+    const content= `
+    <div>
+      <h3 class="h4">${place.name}</h3>
+      <p class="h5">${place.vicinity}</p>
+      <p>Note moyenne : <span class="badge badge-pill badge-success my-auto ml-2">${place.rating}</span></p>
+      <img src="${photos[0].getUrl({ maxWidth: 75, maxHeight: 75 })}">
+    </div>
+    `;
     myInfoWindow.setContent(content);
     myInfoWindow.open(map, marker);
   });
 }
-
-//Afficher les marker en fonction du service
-const callback = (results, status) => {
-  if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-    for (let i = 0; i < results.length; i++) {
-      createMarker(results[i]);
-    }
-    //myMap.setCenter(results[0].geometry.location);
-  }
 }
+
+
+
 
 function localisation(){
   locationInfoWindow = new google.maps.InfoWindow();
