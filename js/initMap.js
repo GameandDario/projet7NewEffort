@@ -115,7 +115,7 @@ function initMap() {
     const placeIsOpenElement = document.createElement("p");
     placeIsOpenElement.textContent = place.openNow;
     content.appendChild(placeIsOpenElement);
-
+ls
     const placePhotoElement = document.createElement("img");
     placePhotoElement.src = photos[0].getUrl({ maxWidth: 55, maxHeight: 55 });
     content.appendChild(placePhotoElement);
