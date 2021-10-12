@@ -13,7 +13,7 @@ function showRestaurants() {
       restaurants[indexRestaurant].lat +
       "," +
       restaurants[indexRestaurant].long +
-      "&fov=80&heading=70&pitch=0&key=AIzaSyDMAm0Z6pnqlSPV8LcE1JfPZpAy9hOlBic";
+      "&fov=80&heading=70&pitch=0&key={YOUR_KEY}";
 
     let result = document.querySelector("#result");
     let ratings = restaurants[indexRestaurant].ratings;
