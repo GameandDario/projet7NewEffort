@@ -1,5 +1,7 @@
 const section = document.querySelector("section");
+let UrlApi;
 let commentsHtml;
+
 function showRestaurants() {
   /* Afficher les restaurants en fonction d'une liste JSON */
 
@@ -8,7 +10,7 @@ function showRestaurants() {
 
   // 2/ récupérer les données des restos dans le json restaurants
   for (let indexRestaurant in restaurants) {
-    let UrlApi =
+    UrlApi =
       "https://maps.googleapis.com/maps/api/streetview?size=200x200&location=" +
       restaurants[indexRestaurant].lat +
       "," +
@@ -187,7 +189,6 @@ function selectScores() {
 
 function handleRestoValue(restos, valueSelected) {
   // on affiche les restos en fonction de la valeur selected avec ajout / suppression de la classe hide
-  console.log(valueSelected);
   if (valueSelected == "All") {
     for (let indexResto = 0; indexResto < restos.length; indexResto++) {
       if (restos[indexResto].classList.contains("hide")) {
@@ -208,4 +209,5 @@ function handleRestoValue(restos, valueSelected) {
 }
 
 showRestaurants();
+
 selectScores();
