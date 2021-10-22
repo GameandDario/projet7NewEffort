@@ -16,7 +16,6 @@ function showRestaurants() {
       "," +
       restaurants[indexRestaurant].long +
       "&fov=80&heading=70&pitch=0&key={YOUR_KEY}";
-
     let result = document.querySelector("#result");
     let ratings = restaurants[indexRestaurant].ratings;
 
@@ -208,6 +207,7 @@ function handleRestoValue(restos, valueSelected) {
   }
 }
 
-showRestaurants();
-
 selectScores();
+
+
+

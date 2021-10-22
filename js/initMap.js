@@ -8,7 +8,10 @@ let moyenneEntiereRestaurant;
 let mapDiv;
 let myMap;
 let service;
-let myMarkerDatas = {};
+
+
+
+
 
 //icon par defaut (clickMarkers et jsonMarkers)
 const defaultIcon = "http://maps.google.com/mapfiles/kml/shapes/dining.png";
@@ -207,7 +210,7 @@ function createGoogleMarker(place) {
     },
     ratings: [
       {
-        comment: restaurants[0].ratings[0].comment,
+        comment: "testComment",
         stars: Math.floor(place.rating * 1).toString(),
       },
     ],
@@ -217,20 +220,51 @@ function createGoogleMarker(place) {
   });
 
   //Ajouter les données GoogleMarkers dans le tableau restaurants
-
-  myMarkerDatas = {
+  let myMarkerDatas = {
     position: marker.position,
     restaurantName:marker.restaurantName,
-    lat:marker.lat,
-    long:marker.long,
-    adress: marker.adress, 
+    lat:marker.position.toJSON().lat,
+    long:marker.position.toJSON().lng,
+    address: marker.adress, 
     ratings:marker.ratings,
-    moyenneEntiere:marker.moyenneEntiere,
+    //moyenneEntiere:marker.moyenneEntiere,
   }
+
   restaurants.push(myMarkerDatas);
+
+  showRestaurants();
+  toggleComments();
+  toggleFormComment();
+  addComments();
+
+  //selectScores();
+
 
 
   googleMarkers.push(marker);
+
+  //Test à supprimer
+ /*  let latLng;
+  let latLngObj;
+  let lat;
+  let lng;
+  let name;
+  for (let indexMarker = 0; indexMarker < googleMarkers.length; indexMarker ++ )
+
+  { 
+    latLng = googleMarkers[indexMarker].position;
+    latLngObj = latLng.toJSON();
+    lat = latLngObj.lat;
+    lng = latLngObj.lng;
+
+  name = googleMarkers[indexMarker].restaurantName;
+
+  console.log('lat', lat);
+  console.log('lng', lng);
+  console.log(`name`, name);
+
+} */
+
   google.maps.event.addListener(marker, "click", () => {
     //création de InfoWindow pour un marker
     const myInfoWindow = new google.maps.InfoWindow();
@@ -394,7 +428,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 
-console.log(`restaurants`, restaurants);
-for (let myResto = 0; myResto < restaurants.length; myResto ++) {
-  console.log('adress', restaurants[myResto].address);
-}
+
+
+
+

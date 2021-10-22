@@ -1,6 +1,7 @@
 //A chaque clic : cacher ou montrer le formulaire d'ajout de commentaire
 const toggleFormComment = function () {
     let myAddCommentButtons = document.getElementsByClassName("add-comment");
+    
    
     let myFormCommentID;
     for (let i = 0; i < myAddCommentButtons.length; i++) {
