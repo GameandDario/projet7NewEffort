@@ -8,7 +8,7 @@ let moyenneEntiereRestaurant;
 let mapDiv;
 let myMap;
 let service;
-
+let myMarkerDatas = {};
 
 //icon par defaut (clickMarkers et jsonMarkers)
 const defaultIcon = "http://maps.google.com/mapfiles/kml/shapes/dining.png";
@@ -96,12 +96,15 @@ function initMap() {
             <h3 class="h4">${restaurants[indexRestaurant].restaurantName}</h3>
           </div>
           <div class="col-4">
+          <p></p>
             <img src ="${UrlApi}" class="img-fluid w-50 img-thumbnail">
           </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <p class="font-weight-bold">${restaurants[indexRestaurant].address}</p></div>
+            <p class="font-weight-bold">${
+              restaurants[indexRestaurant].address
+            }</p></div>
           <div class="col-12">
             <p>Note moyenne : <span class="badge badge-pill badge-success my-auto ml-2">${moyenneArrondi}</span></p>
             </div>
@@ -117,7 +120,7 @@ function initMap() {
       myInfoWindow.open(map, marker);
     });
 
-   //Afficher jsonMarkers séléctionnés
+    //Afficher jsonMarkers séléctionnés
     for (
       mySelectorsIndex = 0;
       mySelectorsIndex < mySelectors.length;
@@ -126,22 +129,19 @@ function initMap() {
       mySelectors[mySelectorsIndex].addEventListener("click", function (e) {
         let selectedValue = e.target.value;
         for (let i = 0; i < jsonMarkers.length; i++) {
-          //console.log(jsonMarkers[i].moyenneEntiere);
+
           if (selectedValue == "All") {
             marker.setMap(myMap);
-
           } else if (selectedValue == marker.moyenneEntiere) {
             marker.setMap(myMap);
-
           } else {
             marker.setMap(null);
-
           }
         }
       });
     }
   }
-  //Creer un marker pour chaque resto depuis la liste fournie
+  //Creer un marker pour chaque resto depuis la liste jSon fournie
   for (let markerIndex = 0; markerIndex < jsonMarkers.length; markerIndex++) {
     addMarker(jsonMarkers[markerIndex]);
   }
@@ -164,7 +164,7 @@ function initMap() {
       coords: event.latLng,
       content:
         "<h3>Votre nouveau marker</h3>" +
-        //JSON.stringify(event.latLng.toJSON(), null, 2) +
+        JSON.stringify(event.latLng.toJSON(), null, 2) +
         `<p>Note par défaut : <span class="badge badge-pill badge-success my-auto ml-2"> ${newMarker.moyenneEntiere}</span></p>`,
       iconImage: `${defaultIcon}`,
       ratings: [
@@ -178,17 +178,15 @@ function initMap() {
     clickMarkers.push(newMarker);
     //ici totalité des markers ajoutés au click
   });
-
 }
 
 /* Fin initMap */
 
 //GOOGLE MARKERS
-//Afficher les marker en fonction du service
+//Afficher les marker en fonction du service API
 const callback = (results, status) => {
   if (status === google.maps.places.PlacesServiceStatus.OK && results) {
     for (let i = 0; i < results.length; i++) {
-      //console.log(results[i], 'results[i]');
       createGoogleMarker(results[i]);
     }
   }
@@ -197,15 +195,42 @@ const callback = (results, status) => {
 function createGoogleMarker(place) {
   const photos = place.photos;
   if (!place.geometry || !place.geometry.location) return;
-
   const marker = new google.maps.Marker({
     map: myMap,
     position: place.geometry.location,
+    lat: parseFloat(`${restaurants[3].lat}`),
+    lng: parseFloat(`${restaurants[0].long}`),
+
+    coords: {
+      lat: parseFloat(`${restaurants[3].lat}`),
+      lng: parseFloat(`${restaurants[0].long}`),
+    },
+    ratings: [
+      {
+        comment: restaurants[0].ratings[0].comment,
+        stars: Math.floor(place.rating * 1).toString(),
+      },
+    ],
     moyenneEntiere: Math.floor(place.rating * 1).toString(),
+    restaurantName:place.name,
+    adress:place.vicinity
   });
 
-  googleMarkers.push(marker);
+  //Ajouter les données GoogleMarkers dans le tableau restaurants
 
+  myMarkerDatas = {
+    position: marker.position,
+    restaurantName:marker.restaurantName,
+    lat:marker.lat,
+    long:marker.long,
+    adress: marker.adress, 
+    ratings:marker.ratings,
+    moyenneEntiere:marker.moyenneEntiere,
+  }
+  restaurants.push(myMarkerDatas);
+
+
+  googleMarkers.push(marker);
   google.maps.event.addListener(marker, "click", () => {
     //création de InfoWindow pour un marker
     const myInfoWindow = new google.maps.InfoWindow();
@@ -213,6 +238,7 @@ function createGoogleMarker(place) {
     <div>
       <h3 class="h4">${place.name}</h3>
       <p class="h5">${place.vicinity}</p>
+      <p class="h5">${marker.position}</p>
       <p>Note moyenne : <span class="badge badge-pill badge-success my-auto ml-2">${
         place.rating
       }</span></p>
@@ -303,8 +329,6 @@ function addMarker(props) {
   }
 }
 
-
-
 //déclarer geolocalisation()
 function geolocalisation() {
   locationInfoWindow = new google.maps.InfoWindow();
@@ -331,23 +355,23 @@ function geolocalisation() {
         () => {
           handleLocationError(true, locationInfoWindow, myMap.getCenter());
 
-  //afficher dès l'ouverture et chaque rechargement de la carte des markers restaurant sur une zone limitée
-  google.maps.event.addListener(myMap, "tilesloaded", function () {
-    const myBounds = myMap.getBounds();
-    const South_Lat = myBounds.getSouthWest().lat();
-    const South_Lng = myBounds.getSouthWest().lng();
-    const North_Lat = myBounds.getNorthEast().lat();
-    const North_Lng = myBounds.getNorthEast().lng();
+          //afficher dès l'ouverture et chaque rechargement de la carte des markers restaurant sur une zone limitée
+          google.maps.event.addListener(myMap, "tilesloaded", function () {
+            const myBounds = myMap.getBounds();
+            const South_Lat = myBounds.getSouthWest().lat();
+            const South_Lng = myBounds.getSouthWest().lng();
+            const North_Lat = myBounds.getNorthEast().lat();
+            const North_Lng = myBounds.getNorthEast().lng();
 
-    const request = {
-      bounds: myBounds,
-      //bounds: which must be a google.maps.LatLngBounds
-      type: ["restaurant"],
-    };
-    // demander un retour de service nearBy API à partir de la requête
-    service = new google.maps.places.PlacesService(myMap);
-    service.nearbySearch(request, callback);
-  });
+            const request = {
+              bounds: myBounds,
+              //bounds: which must be a google.maps.LatLngBounds
+              type: ["restaurant"],
+            };
+            // demander un retour de service nearBy API à partir de la requête
+            service = new google.maps.places.PlacesService(myMap);
+            service.nearbySearch(request, callback);
+          });
         }
       );
     } else {
@@ -357,6 +381,8 @@ function geolocalisation() {
   });
 }
 
+
+
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
@@ -365,4 +391,10 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       : "Error: Your browser doesn't support geolocation."
   );
   infoWindow.open(map);
+}
+
+
+console.log(`restaurants`, restaurants);
+for (let myResto = 0; myResto < restaurants.length; myResto ++) {
+  console.log('adress', restaurants[myResto].address);
 }
