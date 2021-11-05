@@ -1,5 +1,4 @@
 const section = document.querySelector("section");
-let UrlApi;
 let commentsHtml;
 
 function showRestaurants() {
@@ -10,14 +9,15 @@ function showRestaurants() {
 
   // 2/ récupérer les données des restos dans le json restaurants
   for (let indexRestaurant in restaurants) {
-    UrlApi =
-      "https://maps.googleapis.com/maps/api/streetview?size=200x200&location=" +
-      restaurants[indexRestaurant].lat +
-      "," +
-      restaurants[indexRestaurant].long +
-      "&fov=80&heading=70&pitch=0&key={YOUR_KEY}";
+    
     let result = document.querySelector("#result");
     let ratings = restaurants[indexRestaurant].ratings;
+    let UrlApi =
+    "https://maps.googleapis.com/maps/api/streetview?size=200x200&location=" +
+    restaurants[indexRestaurant].lat +
+    "," +
+    restaurants[indexRestaurant].long +
+    "{YOUR_KEY}";
 
     /* 3/ integrer aux éléments HTML les scores et commentaires de chaque restaurant */
     //3.1 déclarations
