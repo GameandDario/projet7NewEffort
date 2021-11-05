@@ -99,7 +99,7 @@ button:active {
   /* Map style */
 
   #mapParis {
-    height: 400px;
+    height: 600px;
     width: 100%;
   }
 
@@ -110,6 +110,10 @@ button:active {
 
   .custom-map-control-button {
     appearance: button;
+    z-index: 0;
+    position: absolute;
+    top: 0px;
+    left: 193px !important;
     background-color: rgb(70, 156, 131);
     border: 0;
     border-radius: 2px;
@@ -120,6 +124,7 @@ button:active {
     height: 40px;
     font: 400 18px Roboto, Arial, sans-serif;
     overflow: hidden;
+
   }
   .custom-map-control-button:hover {
     background: #ebebeb;
