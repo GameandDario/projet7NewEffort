@@ -17,7 +17,7 @@ function showRestaurants() {
     restaurants[indexRestaurant].lat +
     "," +
     restaurants[indexRestaurant].long +
-    "{YOUR_KEY}";
+    "[YOURKEY]";
 
     /* 3/ integrer aux éléments HTML les scores et commentaires de chaque restaurant */
     //3.1 déclarations
@@ -97,8 +97,8 @@ function showRestaurants() {
     let restoHtml = `
     <div class="restaurant-wrapper restaurant-${moyenneEntiereRestaurant}">
   <!-- Afficher Nom resto et Bouton Avis -->
-        <button class="label btn show-comments">
-          ${restaurants[indexRestaurant].restaurantName}
+        <button class="label btn show-comments d-flex">
+          <span class="font-weight-bold">${restaurants[indexRestaurant].restaurantName}</span>
           <a class="ml-3" href="#">Afficher les avis</a>
         </button>
 
@@ -116,7 +116,7 @@ function showRestaurants() {
         </div>
         <!-- Afficher Note Moyenne Resto  -->
         <div class="comments-wrapper container">
-          <div class="moyenne d-flex m-2"> Note moyenne : <span class="badge badge-pill badge-success my-auto ml-2" id="moyenneArrondi-${indexRestaurant}"> ${moyenneArrondi}</span></div>
+          <div class="moyenne bg-light rounded py-1 px-2 d-flex m-2 w-50"> Note moyenne : <span class="badge badge-pill badge-success my-auto ml-2" id="moyenneArrondi-${indexRestaurant}"> ${moyenneArrondi}</span></div>
 
           <!--Ajout de commentsHtml dans un div comments-wrapper-->
           <div class="comments hide" id="comments-${indexRestaurant}">${commentsHtml}</div>

@@ -7,7 +7,7 @@
 
 
 body {
-    background-color: coral;
+    background-color: #cd9c8a;
     font-family: var(--font-family_main);
     color: white;
 }
@@ -65,7 +65,8 @@ h1, h2 {
     font-size: 2rem;
 }
 
-button:hover {background-color: #3e8e41}
+button:hover 
+{background-color: #d9be95}
 button:active {
   background-color: red;
   box-shadow: 0 5px #666;
@@ -169,7 +170,7 @@ button:active {
   }
 
   .add-comment-wrapper {
-    background-color:rgb(240, 180, 109);
+    background-color:#d9be95;
   }
   #comments_ul-el {
     background-color:rgb(54, 111, 85);
