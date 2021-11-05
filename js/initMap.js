@@ -53,7 +53,7 @@ function initMap() {
     restaurants[indexRestaurant].lat +
     "," +
     restaurants[indexRestaurant].long +
-    "{YOUR_KEY}";
+    "&fov=80&heading=70&pitch=0&key={YOURKEY}";
 
     for (let indexRating in ratings) {
       sommeNotesResto += ratings[indexRating].stars;
@@ -213,6 +213,47 @@ function createGoogleMarker(place) {
     adress: place.vicinity,
   });
   googleMarkers.push(marker);
+
+  //création de InfoWindow pour un googlemarker
+  google.maps.event.addListener(marker, "click", () => {
+    
+    const myInfoWindow = new google.maps.InfoWindow();
+    const content = `
+    <div>
+      <h3 class="h4">${place.name}</h3>
+      <p class="h5">${place.vicinity}</p>
+      <p class="h5">${marker.position}</p>
+      <p>Note moyenne : <span class="badge badge-pill badge-success my-auto ml-2">${
+        place.rating
+      }</span></p>
+      <img src="${photos[0].getUrl({ maxWidth: 75, maxHeight: 75 })}">
+    </div>
+    `;
+    myInfoWindow.setContent(content);
+    myInfoWindow.open(map, marker);
+  });
+
+    //Afficher google Markers séléctionnés
+    for (
+      mySelectorsIndex = 0;
+      mySelectorsIndex < mySelectors.length;
+      mySelectorsIndex++
+    ) {
+      mySelectors[mySelectorsIndex].addEventListener("click", function (e) {
+        let selectedValue = e.target.value;
+        for (let i = 0; i < googleMarkers.length; i++) {
+          if (selectedValue == "All") {
+            marker.setMap(myMap);
+          } else if (selectedValue == marker.moyenneEntiere) {
+            //console.log("markercontentGoogle", marker);
+            marker.setMap(myMap);
+          } else {
+            //console.log("falseGoogle", googleMarkers[i].moyenneEntiere);
+            marker.setMap(null);
+          }
+        }
+      });
+    }
 
   //Ajouter les données GoogleMarkers dans le tableau restaurants
 
