@@ -133,6 +133,7 @@ button:active {
   
   .gm-style-iw-d {
       color : chocolate;
+      overflow-x: hidden !important;
   }
 
   article, .my_container {
@@ -177,4 +178,8 @@ button:active {
   }
   #scores_ul-el {
     background-color:rgb(54, 84, 111);
+  }
+
+  .infoWindowGoogle {
+    width: 22rem;
   }
