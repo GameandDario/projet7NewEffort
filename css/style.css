@@ -100,12 +100,12 @@ button:active {
   /* Map style */
 
   #mapParis {
-    height: 600px;
+    height: 100%;
     width: 100%;
   }
 
   #map {
-    height: 400px;
+    height: 600px;
     width: 100%;
   }
 
@@ -148,16 +148,17 @@ button:active {
     border: 2px solid burlywood;
   }
 
-  .restaurant-wrapper {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
+  .restaurant-wrapper:hover {
+box-shadow: 2px 2px 2px 2px rgba(102, 102, 102, 0.468);
   }
 
-  .restaurant-wrapper span { display: block;}
-
+  /* .restaurant-wrapper span { 
+    display: block;
+  }
+ */
   .moyenne {
     font-size: 18px;
-    color: green;
+    color: rgb(54, 111, 85);
   }
 
   .flex{
