@@ -1,8 +1,6 @@
 let myComments = [];
 let myScores = [];
 
-//console.log("Array resto", restaurants[0].ratings);
-
 /* let CurrentComment = {
   comment: "current comment / actuel",
   score: "current score  / actuel",
@@ -82,12 +80,12 @@ function addComments() {
     }
 
     function validateContent() {
-      console.log(`myArrondi`, myArrondi.textContent);
+      //console.log(`myArrondi`, myArrondi.textContent);
 
       myCommentsBox.firstChild.innerHTML += `<li>${newRating} ★ <br/>${newComment}</li>`;
       newArrondi = (newRating + parseInt(myArrondi.textContent)) / 2;
       myArrondi.textContent = newArrondi;
-      console.log(`myArrondi`, myArrondi.textContent);
+      //console.log(`myArrondi`, myArrondi.textContent);
     }
     //console.log(`addCommentBtn`, addCommentBtn)
     //sur bouton Envoi ajout d'une écoute d'évenement click
@@ -105,6 +103,13 @@ function addComments() {
           renderScores();
           validateContent();
           showCommentsResult();
+          /* Comment envoyer ces données vers le google marker ?? */
+         /*  for (let indexGM = 0; indexGM < googleMarkers.length; indexGM ++ ) {
+            if (googleMarkers[indexGM].restaurantName == restaurants[restoIndex].restaurantName) {
+              googleMarkers[indexGM].ratings[0].stars = newRating;
+              googleMarkers[indexGM].ratings[0].comment = newComment;
+            }
+          }  */         
           newRating = "";
         } else {
           alert("vous n'avez pas donné de commentaire");
@@ -113,6 +118,7 @@ function addComments() {
         alert("vous n'avez pas donné de score");
       }
     });
+
   }
 }
 
