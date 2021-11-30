@@ -12,8 +12,11 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <script src="../js/datas/listRestaurants.js"></script>
+    
     <!-- Appel du script pour afficher la carte -->
+    <script src="../js/newForm.js"></script>
     <script src="../js/initMap.js"></script>
+    
 </head>
 
 <body>
@@ -78,14 +81,16 @@
 
     <!-- insert your key -->
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=&fov=80&heading=70&pitch=0&key={YOURKEY}&callback=initMap&libraries=places&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=&fov=80&heading=70&pitch=0&key=APIKEY&callback=initMap&libraries=places&v=weekly"
         async>
         </script>
+        <script src="../js/models/InfoRestos.js"></script>
 
-<script src="../js/showRestaurant.js"></script>
+<!-- <script src="../js/showRestaurant.js"></script> -->
 <script src="../js/comments/displayFormComments.js"></script>
 <script src="../js/comments/displayComments.js"></script>
 <script src="../js/comments/addComments.js"></script>
+
 </body>
 
 </html>
